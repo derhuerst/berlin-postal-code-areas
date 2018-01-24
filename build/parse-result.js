@@ -23,7 +23,10 @@ const parseResult = (r) => {
 
 	const geometry = findIn(r, 'fis:spatial_geometry')
 	const gml = geometry && geometry.children && geometry.children[0] || null
-	if (!gml) throw new Error(id + ': missing gml:Polygon shape')
+	if (!gml) {
+		if (process.env.NODE_ENV === 'dev') console.error(geometry)
+		throw new Error(id + ': missing gml:Polygon shape')
+	}
 	const shape = parsePolygon(gml)
 
 	return {id, code, shape}

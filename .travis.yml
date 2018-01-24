@@ -2,5 +2,18 @@ sudo: false
 language: node_js
 node_js:
   - 'stable'
-  - '8'
-  - '6'
+script:
+  - npm run build
+  - npm test
+before_deploy:
+  - ls -lh s/*.json | wc -l
+  - npm i --no-save semver
+  - npm version --no-git-tag-version --force --allow-same-version $(./node_modules/.bin/semver -i minor $(npm info berlin-postal-code-areas version))
+deploy:
+  provider: npm
+  on:
+    branch: master
+    node: stable
+  email: 'mail@jannisr.de'
+  api_key: ${NPM_TOKEN}
+  skip_cleanup: true

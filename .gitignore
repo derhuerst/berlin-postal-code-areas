@@ -9,4 +9,5 @@ pnpm-debug.log
 package-lock.json
 shrinkwrap.yaml
 
+list.json
 s/*.json
