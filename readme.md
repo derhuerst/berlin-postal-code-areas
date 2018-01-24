@@ -1,5 +1,7 @@
 # berlin-postal-code-areas
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/derhuerst/berlin-postal-code-areas.svg)](https://greenkeeper.io/)
+
 **The shapes of all [ZIP code](https://en.wikipedia.org/wiki/Postal_codes_in_Germany) areas in Berlin as [GeoJSON](http://geojson.org).**
 
 [![npm version](https://img.shields.io/npm/v/berlin-postal-code-areas.svg)](https://www.npmjs.com/package/berlin-postal-code-areas)
