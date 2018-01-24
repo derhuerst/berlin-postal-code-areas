@@ -25,11 +25,16 @@
 	"dependencies": {
 	},
 	"devDependencies": {
+		"parse-gml-polygon": "^0.2.1",
+		"query-fis-broker-wfs": "^0.1.0",
+		"queue": "^4.4.2",
 		"tap-min": "^1.2.2",
-		"tape": "^4.8.0"
+		"tape": "^4.8.0",
+		"transform-coordinates": "^0.1.0"
 	},
 	"scripts": {
+		"build": "rm s/*.json list.json; env NODE_ENV=dev node build/index.js",
 		"test": "env NODE_ENV=dev node test.js | tap-min",
-		"prepublishOnly": "npm test"
+		"prepublishOnly": "npm run build && npm test"
 	}
 }
