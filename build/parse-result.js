@@ -3,6 +3,7 @@
 const createTransform = require('transform-coordinates')
 const parseGmlPolygon = require('parse-gml-polygon')
 const {findIn, attrOf, textOf} = require('query-fis-broker-wfs/lib/helpers')
+const simplify = require('@turf/simplify')
 
 const transform = createTransform('25833', '4326')
 
@@ -28,6 +29,7 @@ const parseResult = (r) => {
 		throw new Error(id + ': missing gml:Polygon shape')
 	}
 	const shape = parsePolygon(gml)
+	simplify(shape, {tolerance: .0001, highQuality: true, mutate: true})
 
 	return {id, code, shape}
 }
