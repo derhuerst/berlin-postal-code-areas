@@ -12,7 +12,7 @@ const showError = (err) => {
 }
 
 const writeList = (data, cb) => {
-	const dest = path.join(__dirname, '..', 's', 'list.json')
+	const dest = path.join(__dirname, '..', 'list.json')
 	fs.writeFile(dest, JSON.stringify(data), cb)
 }
 
@@ -20,11 +20,11 @@ const berlin = [416868 - 10, 5799302 + 10, 369095 + 10, 5838240 - 10]
 const list = Object.create(null) // code -> shape ID
 
 const queue = createQueue({concurrency: 4, autostart: true})
-queue.on('error', showError)
+queue.once('error', showError)
 
 const [maxX, minY, minX, maxY] = berlin
-const dX = (maxX - minX) / 40
-const dY = (maxY - minY) / 40
+const dX = (maxX - minX) / 10
+const dY = (maxY - minY) / 10
 for (let x = minX; x < maxX; x += dX) {
 	for (let y = minY; y < maxY; y += dY) {
 		const tile = [

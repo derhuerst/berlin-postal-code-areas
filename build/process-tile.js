@@ -42,7 +42,7 @@ const processTile = (list, bbox) => {
 
 			writeShape(res.id, res.shape, (err) => {
 				if (err) return cb(err)
-				list[res.code] = res.id
+				list[res.code] = res.id + '.json'
 				console.info(res.code, '->', res.id)
 				cb()
 			})

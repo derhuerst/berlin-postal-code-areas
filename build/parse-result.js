@@ -21,9 +21,10 @@ const parseResult = (r) => {
 	let code = textOf(findIn(r, 'fis:spatial_name'))
 	if (code) code = code.trim()
 
-	const polygon = findIn(r, 'fis:spatial_geometry', 'gml:Polygon')
-	if (!polygon) throw new Error(id + ': missing gml:Polygon shape')
-	const shape = parsePolygon(polygon)
+	const geometry = findIn(r, 'fis:spatial_geometry')
+	const gml = geometry && geometry.children && geometry.children[0] || null
+	if (!gml) throw new Error(id + ': missing gml:Polygon shape')
+	const shape = parsePolygon(gml)
 
 	return {id, code, shape}
 }
