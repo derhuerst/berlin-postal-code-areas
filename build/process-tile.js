@@ -17,37 +17,43 @@ const writeShape = (id, shape, cb) => {
 
 const list = Object.create(null) // code -> shape ID
 
-const processTile = (list, bbox, cb) => {
-	let done = false
-	const onError = (err) => {
-		if (done) return
-		done = true
-		cb(err)
-	}
-	const onFinish = () => {
-		if (done) return
-		done = true
-		cb()
-	}
-
-	const onResult = (res, _, cb) => {
-		try {
-			res = parseResult(res)
-		} catch (err) {
-			return cb(err)
+const processTile = (list, bbox) => {
+	const run = (cb) => {
+		let done = false
+		const onError = (err) => {
+			if (done) return
+			done = true
+			cb(err)
 		}
-		writeShape(res.id, res.shape, (err) => {
-			if (err) return cb(err)
-			list[res.code] = res.id
-			console.info(res.code, '->', res.id)
+		const onFinish = () => {
+			if (done) return
+			done = true
 			cb()
-		})
-	}
+		}
 
-	getFeatures(endpoint, layer, {bbox})
-	.pipe(new Writable({objectMode: true, write: onResult}))
-	.once('error', onError)
-	.once('finish', onFinish)
+		const onResult = (res, _, cb) => {
+			try {
+				res = parseResult(res)
+			} catch (err) {
+				return cb(err)
+			}
+
+			if (list[res.code]) return cb() // shape already written
+
+			writeShape(res.id, res.shape, (err) => {
+				if (err) return cb(err)
+				list[res.code] = res.id
+				console.info(res.code, '->', res.id)
+				cb()
+			})
+		}
+
+		getFeatures(endpoint, layer, {bbox})
+		.pipe(new Writable({objectMode: true, write: onResult}))
+		.once('error', onError)
+		.once('finish', onFinish)
+	}
+	return run
 }
 
 module.exports = processTile

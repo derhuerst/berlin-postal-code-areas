@@ -17,12 +17,14 @@ const transformCoords = (x, y) => {
 const parsePolygon = p => parseGmlPolygon(p, transformCoords)
 
 const parseResult = (r) => {
-	const polygon = findIn(r, 'fis:spatial_geometry', 'gml:Polygon')
-	const shape = parsePolygon(polygon)
-
 	const id = attrOf(r, 'gml:id')
 	let code = textOf(findIn(r, 'fis:spatial_name'))
 	if (code) code = code.trim()
+
+	const polygon = findIn(r, 'fis:spatial_geometry', 'gml:Polygon')
+	if (!polygon) throw new Error(id + ': missing gml:Polygon shape')
+	const shape = parsePolygon(polygon)
+
 	return {id, code, shape}
 }
 
