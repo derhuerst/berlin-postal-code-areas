@@ -29,7 +29,7 @@
 		"@turf/simplify": "^5.1.5",
 		"geojson-is-valid": "0.0.5",
 		"parse-gml-polygon": "^0.3.0",
-		"query-fis-broker-wfs": "^0.1.0",
+		"query-fis-broker-wfs": "^1.0.0",
 		"queue": "^6.0.0",
 		"tap-min": "^1.2.2",
 		"tape": "^4.8.0",
