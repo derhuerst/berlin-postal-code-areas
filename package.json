@@ -1,7 +1,7 @@
 {
 	"name": "berlin-postal-code-areas",
 	"description": "The shapes of all ZIP code areas in Berlin as GeoJSON.",
-	"version": "0.1.1",
+	"version": "1.0.0",
 	"main": "index.js",
 	"files": [
 		"index.js",
@@ -22,7 +22,7 @@
 	"bugs": "https://github.com/derhuerst/berlin-postal-code-areas/issues",
 	"license": "ISC",
 	"engines": {
-		"node": ">=6"
+		"node": ">=12"
 	},
 	"dependencies": {
 	},
@@ -30,9 +30,9 @@
 		"@turf/simplify": "^5.1.5",
 		"geojson-is-valid": "0.0.5",
 		"parse-gml-polygon": "^0.3.0",
-		"query-fis-broker-wfs": "^0.1.0",
+		"query-fis-broker-wfs": "^1.0.0",
 		"queue": "^6.0.0",
-		"tap-min": "^1.2.2",
+		"tap-min": "^2.0.0",
 		"tape": "^5.0.0",
 		"transform-coordinates": "^0.1.0"
 	},
